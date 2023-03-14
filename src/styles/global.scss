@@ -1,0 +1,14 @@
+@import "./theme.scss";
+.main {
+  --color-text: #{$color-white};
+  --color-background: #{$color-black};
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: "Lato", sans-serif;
+}
