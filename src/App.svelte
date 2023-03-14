@@ -71,6 +71,8 @@
     @include respond-above(lg){
       max-width: 600px;
     }
+
+    
   }
 
   .page{
@@ -78,6 +80,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media (max-height: 768px) {
+      justify-content: center;
+      .header{
+        display: none;
+      }
+    }
   }
 
   .main {
