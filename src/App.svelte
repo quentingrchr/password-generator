@@ -90,7 +90,7 @@
   }
 
   .main {
-    height: 80vh;
+    min-height: 80vh;
     background-color: var(--color-background);
     display: flex;
     flex-direction: column;
@@ -98,6 +98,7 @@
     justify-content: center;
     width: 100%;
     font-family: "Lato", sans-serif;
+    margin-bottom: 40px;
   }
 
   .title{

@@ -45,6 +45,7 @@
     margin-left: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     flex: 1;
   }
 
