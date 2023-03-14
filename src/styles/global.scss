@@ -1,14 +1,18 @@
 @import "./theme.scss";
-.main {
-  --color-text: #{$color-white};
-  --color-background: #{$color-black};
+
+body {
   background-color: var(--color-background);
   color: var(--color-text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  font-family: "Lato", sans-serif;
+
+  --color-text: #{$color-white};
+  --color-background: #{$color-black};
+  --color-background-2: #{$color-grey-900};
+  --color-brand: #{$color-green};
+
+  &.light {
+    --color-text: #{$color-black};
+    --color-background: #{$color-white};
+    --color-background-2: #{$color-grey-100};
+    --color-brand: #{$color-green-2};
+  }
 }

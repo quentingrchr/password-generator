@@ -29,7 +29,7 @@
     display: none;
     &:checked{
       ~ .checkbox{
-        border: 2px solid $color-green;
+        border: 2px solid var(--color-brand);
         .checkmark{
           display: block;
         }
@@ -48,6 +48,6 @@
 
   .checkmark{
       display: none;
-      stroke: $color-green;
+      stroke: var(--color-brand);
     }
 </style>

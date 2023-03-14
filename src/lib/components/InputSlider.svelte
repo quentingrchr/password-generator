@@ -17,7 +17,7 @@
     <label class="label" for={name}>{label}</label>
     <span class="value">{$form[name]}</span>
   </div>
-  <input class="input" type="range" bind:this={inputElement} bind:value={form[name]} on:input={(e) => {
+  <input class="input" type="range" id={name} bind:this={inputElement} bind:value={form[name]} on:input={(e) => {
     form.update((values) => {
       values[name] = e.target.value;
       return values;
@@ -51,7 +51,7 @@
   }
 
   .value{
-    color: $color-green;
+    color: var(--color-brand);
     font-size: 20px;
     font-weight: 700;
   }
@@ -79,7 +79,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--color-background);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -10px;
@@ -102,7 +102,7 @@ input[type="range"]::-moz-range-thumb {
   height: 36px;
   width: 16px;
   border-radius: 3px;
-  background: #ffffff;
+  background: var(--color-background);
   cursor: pointer;
 }
 input[type="range"]::-ms-track {
@@ -133,7 +133,7 @@ input[type="range"]::-ms-thumb {
   height: 36px;
   width: 16px;
   border-radius: 3px;
-  background: #ffffff;
+  background: var(--color-background);
   cursor: pointer;
 }
 input[type="range"]:focus::-ms-fill-lower {

@@ -13,7 +13,7 @@
 <style lang="scss">
 	@import "$styles/theme.scss";
   .button {
-    background-color: $color-green;
+    background-color: var(--color-brand);
     color: var(--color-background);
     border: none;
     outline: none;
@@ -38,7 +38,7 @@
 
     &:hover{
       background-color: var(--color-background);
-      border: 2px solid $color-green;
+      border: 2px solid var(--color-brand);
       color: var(--color-text);
     } 
 

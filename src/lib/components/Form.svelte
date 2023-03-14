@@ -27,7 +27,7 @@
 	@import "$styles/theme.scss";
   
 	.form{
-    background-color: $color-grey-900;
+    background-color: var(--color-background-2);
     display: flex;
     flex-direction: column;
     align-items: center;

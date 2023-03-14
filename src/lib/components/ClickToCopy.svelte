@@ -13,7 +13,7 @@
 
 <div class="container" on:click={copyToClipboard}>
   <p class="text">{label}</p>
-  <span class="icon">
+  <span class="icon" aria-hidden="true">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Clipboard</title><path d="M420 48h-68V28a12 12 0 00-12-12H172a12 12 0 00-12 12v20H92a12 12 0 00-12 12v424a12 12 0 0012 12h328a12 12 0 0012-12V60a12 12 0 00-12-12zm-84.13 64H176.13V80h159.74z"/></svg>
   </span>
 </div>
@@ -21,18 +21,17 @@
 <style lang="scss">
 	@import "$styles/theme.scss";
   .container {
-    background-color: $color-grey-900;
+    background-color: var(--color-background-2);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px;
     width: 100%;
     max-width: 100%;
-    
     &:hover{
       .icon{
-        svg, path, rect{
-          fill: $color-green;
+        svg, path{
+          fill: var(--color-brand);
         }
       }
     }
@@ -52,7 +51,7 @@
   .icon{
     width: 24px;
     height: 24px;
-    svg, path, rect{
+    svg, path{
       fill: var(--color-text);
     }
   }
