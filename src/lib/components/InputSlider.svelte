@@ -8,7 +8,6 @@
   let inputElement: HTMLInputElement;
   onMount(() => {
     inputElement.focus();
-    console.log(inputElement);
   });
 </script>
 
