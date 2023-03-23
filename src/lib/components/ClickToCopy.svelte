@@ -55,6 +55,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1;
+    @include respond-below(sm){
+      font-size: 20px;
+    }
   }
 
   :global(.clipboard){

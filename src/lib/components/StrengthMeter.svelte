@@ -1,44 +1,33 @@
 <script lang="ts">
-  import type { StrengthStatus } from "../../types";
 
-  export let status : StrengthStatus | undefined = undefined;
+  export let score : number; 
 
-  const statusMap: Record<StrengthStatus, {
-    color: string;
-    bars: boolean[];
-  }> = {
-    weak: {
-      color: "red",
-      bars: [true, true, false, false],
-    },
-    medium: {
-      color: "orange",
-      bars: [true, true, true, false],
-    },
-    strong: {
-      color: "green",
-      bars: [true, true, true, true],
-    },
-  };
+  const levels = ["#FF0000", "#FFA500", "#FFFF00", "#7CFC00", "#00FF00"];
+
+  const levelsText = [
+    "Use stronger password, pls.", "Step up your password game.", "Wake up, Neo. Try again.", "FBI-proof password. No comment.", "Mr. Robot approved."
+  ];
+
+  
 </script>
 
-<div class="container" style="--bar-color: {status !== undefined ? statusMap[status].color : "white" }">
+<div class="container" style="--bar-color: {score !== undefined ? levels[score] : "white" }">
   <p class="label">
     Strength
   </p>
   <div class="meter">
-    {#if status !== undefined}
-      <p class="value">{status}</p>
+    {#if score !== undefined}
+      <p class="value">{levelsText[score]}</p>
     {/if}
     <div class="bars">
-      {#if status === undefined}
+      {#if score === undefined}
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
       {:else}
-      {#each statusMap[status].bars as bar}
-        <div class:filled={bar} class="bar"></div>
+      {#each levels as level, index}
+        <div class:filled={index <= score} class="bar"></div>
       {/each}
       {/if}
     </div>  
@@ -61,20 +50,27 @@
         display: block;
       }
     }
+    
   }
 
   .meter{
     display: flex;
     align-items: center;
     gap: 20px;
+    
   }
 
   .value{
     color: var(--color-text);
     display: flex;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
+    // word-wrap: break-word;
+    white-space: nowrap;
+    @include respond-below(sm){
+      font-size:8px;
+    }
   }
 
 
@@ -87,12 +83,18 @@
     padding: 4px;
     text-transform: uppercase;
     display: none;
+    @include respond-below(sm){
+      font-size:8px;
+    }
   }
 
   .bars{
     display: flex;
     gap: var(--bar-width);
     height: 100%;
+    @include respond-below(sm){
+      display: none;
+    }
   }
 
   .bar{

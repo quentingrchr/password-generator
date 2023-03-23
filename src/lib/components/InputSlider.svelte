@@ -21,7 +21,7 @@
       values[name] = e.target.value;
       return values;
     });
-  }} min="1" max="100" step="1" />
+  }} min="1" max="25" step="1" />
 </fieldset>
 
 <style lang="scss">
@@ -38,6 +38,9 @@
   .label{
     font-weight: 400;
     font-size: 18px;
+    @include respond-below(sm){
+      font-size: 12px;
+    }
   }
 
   .input{
@@ -53,6 +56,10 @@
     color: var(--color-brand);
     font-size: 20px;
     font-weight: 700;
+    @include respond-below(sm){
+      font-size: 14px;
+    }
+    
   }
 
   input[type="range"] {

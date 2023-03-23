@@ -24,6 +24,9 @@
   .label{
     font-weight: 600;
     font-size: 20px;
+    @include respond-below(sm){
+      font-size: 12px;
+    }
   }
   .input{
     display: none;

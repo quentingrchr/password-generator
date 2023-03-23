@@ -1,4 +1,5 @@
 <script lang="ts">
+  import zxcvbn from "zxcvbn";
   import form from "./lib/stores/form";
   import ClickToCopy from "./lib/components/ClickToCopy.svelte";
   import Form from "./lib/components/Form.svelte";
@@ -7,24 +8,27 @@
   import type { PasswordData } from "./types";
   let pwData : PasswordData | undefined = undefined;
   let error: undefined | string = undefined
+  
 
 
-  function onSubmit(event: SubmitEvent) {
-    error = undefined;
-    event.preventDefault();
-    const validate = validateForm($form);
-    if(!validate.valid){
-      error = validate.message;
-    } else {
-      pwData = generatePassword($form.length, {
-        withUppercase: $form['with-uppercase'],
-        withLowercase: $form['with-lowercase'],
-        withNumbers: $form['with-numbers'],
-        withSymbols: $form['with-symbols']
-      })
-      
+
+
+  form.subscribe((form) => {
+    if(validateForm(form)){
+      const password = generatePassword(form.length, {
+        withUppercase: form["with-uppercase"],
+        withLowercase: form["with-lowercase"],
+        withNumbers: form["with-numbers"],
+        withSymbols: form["with-symbols"],
+      });
+      const estimation = zxcvbn(password)
+      pwData = {
+        password,
+        crackedTimeDisplay: estimation.crack_times_display.offline_fast_hashing_1e10_per_second,
+        score: estimation.score
+      }
     }
-  }
+  });
 
   function toggleTheme(){
     document.querySelector('body')?.classList.toggle('light');
@@ -34,14 +38,14 @@
 <div class="page">
 <header class="header">
   <span class="icon" on:click={toggleTheme}>
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 512 512"><title>Contrast</title><path d="M256 32C132.29 32 32 132.29 32 256s100.29 224 224 224 224-100.29 224-224S379.71 32 256 32zM128.72 383.28A180 180 0 01256 76v360a178.82 178.82 0 01-127.28-52.72z"/></svg>
+    <svg class="icon" viewBox="0 0 512 512"><title>Contrast</title><path d="M256 32C132.29 32 32 132.29 32 256s100.29 224 224 224 224-100.29 224-224S379.71 32 256 32zM128.72 383.28A180 180 0 01256 76v360a178.82 178.82 0 01-127.28-52.72z"/></svg>
   </span>
 </header>
 <main class="main">
   <div class="container">
     <h1 class="title">Password Generator</h1>
-    <ClickToCopy label={pwData?.password ? pwData?.password : "Password"}/>
-    <Form onSubmit={onSubmit} strength={pwData?.strength ? pwData.strength : undefined}/>
+    <ClickToCopy label={pwData.password ? pwData.password : "Password"}/>
+    <Form score={pwData.score} timeToCrack={pwData.crackedTimeDisplay}/>
     {#if error}
       <p class="error">{error}</p>
     {/if}
@@ -59,7 +63,8 @@
     align-items: center;
     gap: 24px;
     position: relative;
-    max-width: 80vw;
+    max-width: 30rem;
+    width: 50vw;
     @include respond-above(sm){
       min-width: 400px;
     }
